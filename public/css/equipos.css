@@ -1,0 +1,27 @@
+input[type=date]{
+	width: 20%;
+}
+
+input[type=number]{
+	width: 20%;
+}
+
+#tipo{
+	width: 10%;
+}
+
+.width_10{
+	width: 10%;
+}
+
+.width_35{
+	width: 35%;	
+}
+
+.width_60{
+	width: 60%;
+}
+
+.hidders{
+	display: none;
+}

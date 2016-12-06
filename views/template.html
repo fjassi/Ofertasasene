@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://getbootstrap.com/examples/jumbotron/# -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Marcos Iglesias">
+    <link rel="icon" href="/uploads/favicon.ico">
+    <title>Evhsa</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="/css/datepicker.css" rel="stylesheet"> -->
+    <!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="/css/signin.css" rel="stylesheet">
+    <link href="/css/bootstrap-submenu.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css">
+    <!-- Custom styles for this template-->
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <!-- <script src="/js/highcharts/highcharts.js"></script> -->
+    <!-- <script src="/js/highcharts.src.js"></script> -->
+</head>
+<body style="padding-top:0px">
+<!--COMIENZO BARRA NAVEGACION-->
+<nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/inicio" style="padding-top: 3px;margin-left: 5px;"><img src="/uploads/evhsalogochico.jpg"></a>
+        </div>
+        <!-- 
+            PARA LOS USUARIOS QUE NO TIENEN PERMISO PONERLE "CLASS=DISABLED" EN EL <li> MENU ??
+        -- >
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-submenu="">Repuestos<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/repuestoslista" id="btnRepuestos" class="menu" data-idmenu="4" data-accion="c">Repuestos [ABM]</a></li>
+                        <li><a href="/rubroslista" class="menu" data-idmenu="2" data-accion="c">Rubros [ABM]</a></li>
+                        <li><a href="/rubrosgruposlista" class="menu" data-idmenu="3" data-accion="c">Grupo de Rubros [ABM]</a></li>
+                        <!-- <li><a href="/inicio" class="menu" data-idmenu="6" data-accion="c">- Control de Stock</a></li> -->
+                        <li class="divider"></li> 
+                        <li><a href="/umedlista" class="menu" data-idmenu="5" data-accion="c">Unidades de Medida [ABM]</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-submenu="">Movimientos<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/vales_lista" class="menu" data-idmenu="16" data-accion="c" id="btnVales">* Vales de Pañol</a></li>
+                        <!-- <li><a href="/inicio" class="menu" data-idmenu="17" data-accion="c">Ficha de Conjuntos</a></li> -->
+                        <li class="dropdown-submenu">
+                            <a>Ficha de Conjuntos</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/conjuntos_alta" tabindex="0" class="menu" data-idmenu="17" data-accion="a" id="btnConjuntoAlta">Nueva Ficha</a></li>
+                                <li><a href="/conjunto_buscarfichaxcodigo" tabindex="1" class="menu" data-idmenu="17" data-accion="c">Buscar Ficha x Codigo</a></li>
+                                <li><a href="/conjunto_buscarfichaxlistado" tabindex="2" class="menu" data-idmenu="17" data-accion="c">Buscar Ficha x Listado</a></li>
+                                <li><a href="/conjunto_buscarxcoche" tabindex="3" class="menu" data-idmenu="17" data-accion="c">Formacion de Coche</a></li>
+                                <li><a href="/conjunto_buscarneumaticoxcoche" tabindex="3" class="menu" data-idmenu="17" data-accion="c">Ubicación de Neumáticos</a></li>
+                                <!-- <li><a href="/conjunto_neumaticos_resumen" tabindex="3" class="menu" data-idmenu="17" data-accion="c">Resumen de Neumáticos</a></li> -->
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a>Combustibles</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/planilladiarialista" tabindex="0" class="menu" data-idmenu="25" data-accion="c">* Planilla Diaria</a></li>
+                                <li><a href="/tanklista" tabindex="1" class="menu" data-idmenu="26" data-accion="c">* Cargas de Gas Oil a Tanque/s</a></li>
+                                <li><a href="/stockgasoilentanque" tabindex="2" class="menu" data-idmenu="27" data-accion="c">* Stock de Gas Oil en Tanque/s</a></li>
+                                <li><a href="/consumoxfechas" tabindex="3" class="menu" data-idmenu="28" data-accion="c">* Consumos x Fecha</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a>Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/herramientas_lista" tabindex="" class="menu" data-idmenu="" data-accion="c" id="btnHerramientas">Movimientos</a></li>
+                                <li><a href="/herramientas_controlmensual" tabindex="" class="menu" data-idmenu="" data-accion="c">Control Mensual</a></li>
+                                <li><a href="/inicio" tabindex="" class="menu" data-idmenu="" data-accion="c">- Herramientas a Cambiar</a></li>
+                                <li><a href="/herramientas_reporteubicacion" tabindex="" class="menu" data-idmenu="" data-accion="c">Reporte x Ubicación</a></li>
+                                <li><a href="/herramientas_disponibilidad" tabindex="" class="menu" data-idmenu="" data-accion="c">Disponibilidad</a></li>
+                                <!-- <li><a href="/inicio" tabindex="" class="menu" data-idmenu="" data-accion="c">Volver</a></li> -->
+                            </ul>
+                        </li>
+                        <li><a href="/remitos_lista" class="menu" data-idmenu="19" data-accion="c" id="btnRemitos">Remitos</a></li>
+                        <!-- <li><a href="/sereno_lista" class="menu" data-idmenu="20" data-accion="c">* Repuestos en Sereno</a></li> -->
+                        <li><a href="/equipos_lista" class="menu" data-idmenu="21" data-accion="c">Equipos</a></li>
+                        <li><a href="/ordenestrabajo_lista" id="btnOrdenesTrabajo" class="menu" data-idmenu="22" data-accion="c">- Ordenes de Trabajo</a></li>
+                        <li><a href="/reparaciones_lista" class="menu" data-idmenu="23" data-accion="c" id="btnReparaciones">Reparaciones de Emergencia</a></li>
+                        <li><a href="/novedades_lista" class="menu" data-idmenu="24" data-accion="c">Novedades de Coches</a></li>
+                        <li><a href="/impresion_asistencia_tecnica">Impresion Asistencia Tecnica</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li><a href="/inicio" class="menu" data-idmenu="29" data-accion="c">- Carpetas x Coche</a></li> -->
+                        <li><a href="/consumos_x_coches" class="menu" data-idmenu="30" data-accion="c">Consumos x Coches</a></li>
+                        <li><a href="/kmxcoche_alta" class="menu" data-idmenu="31" data-accion="c">Importar Km</a></li>
+                        <li><a href="/kmxcoche_form" class="menu" data-idmenu="31" data-accion="c">Kms x Coche</a></li>
+                        <li><a href="/mvto_conjuntos_form" class="menu" data-idmenu="32" data-accion="c">Mvto. de Conjuntos x coche</a></li>
+                        <li><a href="/stockdeconjuntos_form" class="menu" data-idmenu="33" data-accion="c">Stock de Conjuntos</a></li>
+                        <li><a href="/inicio" class="menu" data-idmenu="34" data-accion="c">- Fichas de Vehiculos</a></li>
+                        <li><a href="/inicio" class="menu" data-idmenu="35" data-accion="c">- Informes Contador</a></li>
+                        <li><a href="/inicio" class="menu" data-idmenu="36" data-accion="c">- Hs. & Consumos x Coches</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Datos<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/proveedoreslista" class="menu" data-idmenu="37" data-accion="c">Proveedores</a></li>
+                        <li><a href="/agendalista" class="menu" data-idmenu="38" data-accion="c">Agenda Diaria</a></li>
+                        <li><a href="/facturas_lista" id="btnFacturas" class="menu" data-idmenu="46" data-accion="c">Facturas</a></li>
+                        <li><a href="/otrosgastoslista" class="menu" data-idmenu="39" data-accion="c">Otros Gastos</a></li>
+                        <li><a href="/vehiculoslista" class="menu" data-idmenu="40" data-accion="c">Vehículos</a></li>
+                        <li><a href="/usuarioslista" class="menu" data-idmenu="1" data-accion="c">Operarios/Usuarios</a></li>
+                        <!-- <li><a href="/inicio" class="menu" data-idmenu="41" data-accion="c">- Abreviaturas</a></li> -->
+                    </ul>
+                </li>
+                {% if user.niveles|lower == 'supervisor' or user.niveles|lower == 'administracion' or user.niveles|lower == 'supervisor administracion' or user.niveles|lower == 'administracion supervisor' %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administracion<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/codigosie_lista" class="menu" data-idmenu="43" data-accion="c">Códigos de Ingresos/Egresos [ABM]</a></li>
+                            <li><a href="/ingegr_lista" class="menu" data-idmenu="44" data-accion="c" id="btnIngEgrLista">Ingesos / Egresos Diarios [ABM]</a></li>
+                            <li><a href="/flujodefondos_index" class="menu" data-idmenu="45" data-accion="c">Flujo de Fondos</a></li>
+                            <li><a href="/flujodefondos_informe_form" class="menu" data-idmenu="45" data-accion="c" id="btnInformeFF">Informe</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if user.niveles == 'supervisor' %}
+                    <li class="dropdown"><a href="/random" class="menu" data-idmenu="00" data-accion="c">Interno</a></li>
+                {% endif %}
+                <li class="dropdown"><a href="/ayuda">Ayuda</a></li>
+                <li class="dropdown"><a href="/logout">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li style="padding-right: 20px;"><p class="navbar-text navbar-right">Usuario: <strong>{% if user %} {{ user.usuario }} - {{ user.horaLogin }} {% else %} guest {% endif %}</strong></p></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<!--FIN BARRA NAVEGACION-->
+
+<div class="container">
+	{% block content %}
+	{% endblock %}	
+	<footer>
+        <p>©2015 <a href="http://leandrodapello.com" target="_blank">www.LeandroDapello.com</a></p>
+    </footer>
+</div> <!-- /container -->
+<!-- Bootstrap core JavaScrdsadasdasiptdasdasdasd
+================================================== -->    
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/main.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap-submenu.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- <script src="/js/bootstrap-datepicker.js"></script> -->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript">
+    $('[data-submenu]').submenupicker();
+
+    $(function() {
+        $(".menu").on("click", function (){
+            var id_menu = $(this).data("idmenu");
+            var accion = $(this).data("accion");
+            $.post("/updatemenuinfo/"+id_menu+"/"+accion, function(data, textStatus, xhr) {
+                /*optional stuff to do after success */
+                console.log(data)
+                console.log(textStatus)
+                console.log(xhr)
+            });
+        });
+        
+        $(document).on("click",".menu",function(){ 
+            var id_menu = $(this).data("idmenu");
+            var accion = $(this).data("accion");
+            $.post("/updatemenuinfo/"+id_menu+"/"+accion, function(data, textStatus, xhr) {
+                /*optional stuff to do after success */
+                console.log(data)
+                console.log(textStatus)
+                console.log(xhr)
+            });
+        });
+
+        $("#btnIngEgrLista").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                // const storage = localStorage;
+                // console.log(storage.length);                   
+                   
+                localStorage.clear();
+
+                const myDate = new Date(); 
+                myDate.setFullYear(myDate.getFullYear());
+                day = myDate.getDate();
+                if (day<10)
+                    day = "0"+day;
+                month = myDate.getMonth()+1;
+                if (month<10)
+                    month = "0"+month
+                Today = day + "/" + month + "/" + myDate.getFullYear();
+                PrimeroDeMes = "01/"+month+'/'+myDate.getFullYear();
+
+                var objDatos = {"fecha_01": PrimeroDeMes, "fecha_hoy": Today}
+
+                var objDatos_stringified = JSON.stringify(objDatos);
+
+                // if (storage.length == 0){
+                localStorage.setItem('objDatos', objDatos_stringified);
+                // }
+                
+            } else { 
+                alert('No soporta LocalStorage. Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnRepuestos").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                   
+                localStorage.clear();
+
+                const flag = true;
+                var cmbFiltro = "14";
+                var cmbRubro1 = "0";
+                var cmbRubro2 = "0";
+                var txtCalle = "";
+                var numModulo = "";
+                var txtEstante = "";
+                var rubroResumidoDesde = "0";
+                var rubroResumidoHasta = "0";
+
+                var objDatos = {
+                    "flag" : flag,
+                    "cmbFiltro" : cmbFiltro,
+                    "cmbRubro1" : cmbRubro1, 
+                    "cmbRubro2" : cmbRubro2, 
+                    "txtCalle" : txtCalle, 
+                    "numModulo" : numModulo, 
+                    "txtEstante" : txtEstante, 
+                    "rubroResumidoDesde" : rubroResumidoDesde, 
+                    "rubroResumidoHasta" : rubroResumidoHasta
+                }
+
+                var objDatos_stringified = JSON.stringify(objDatos);
+                localStorage.setItem('objDatos', objDatos_stringified);                
+            } else { 
+                alert('No soporta LocalStorage. Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnOrdenesTrabajo").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                   
+                localStorage.clear();
+
+                const flag = true;
+                const myDate = new Date(); 
+                myDate.setFullYear(myDate.getFullYear());
+                day = myDate.getDate();
+                if (day<10)
+                    day = "0"+day;
+                month = myDate.getMonth()+1;
+                if (month<10)
+                    month = "0"+month
+                fecha_hasta = day + "/" + month + "/" + myDate.getFullYear();
+                fecha_desde = "01/"+month+'/'+myDate.getFullYear();
+
+                var objDatos = {
+                    "fecha_desde" : fecha_desde,
+                    "fecha_hasta" : fecha_hasta, 
+                }
+
+                var objDatos_stringified = JSON.stringify(objDatos);
+                localStorage.setItem('objDatos', objDatos_stringified);                
+            } else { 
+                alert('No soporta LocalStorage. Actualize el navegador !!'); 
+            }
+        });
+        
+        $("#btnVales").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                // var storage = localStorage;
+                // console.log(storage.length);  
+                localStorage.clear();
+
+                var myDate = new Date(); 
+                myDate.setFullYear(myDate.getFullYear());
+                year = myDate.getFullYear();
+                month = myDate.getMonth()+1;
+                day = myDate.getDate();
+                if (month<10)
+                    month = "0"+month;
+                if (day<10)
+                    day = "0"+day;
+                const first = "01/"+month+"/"+year;
+                const today = day+"/"+month+"/"+year;
+
+                var objFechas = {"fecha_01": first, "fecha_hoy": today}
+
+                var objFechas_stringified = JSON.stringify(objFechas);
+
+                // if (storage.length == 0){
+                localStorage.setItem('objFechas', objFechas_stringified);
+                // }
+                
+            } else { 
+                alert('No soporta LocalStorage. Use Chrome o Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnReparaciones").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                // var storage = localStorage;
+                // console.log(storage.length);  
+                localStorage.clear();
+
+                var myDate = new Date(); 
+                myDate.setFullYear(myDate.getFullYear());
+                year = myDate.getFullYear();
+                month = myDate.getMonth()+1;
+                day = myDate.getDate();
+                if (month<10)
+                    month = "0"+month;
+                if (day<10)
+                    day = "0"+day;
+                const first = "01/"+month+"/"+year;
+                const today = day+"/"+month+"/"+year;
+
+                var objFechas = {"fecha_01": first, "fecha_hoy": today}
+
+                var objFechas_stringified = JSON.stringify(objFechas);
+
+                // if (storage.length == 0){
+                localStorage.setItem('objFechas', objFechas_stringified);
+                // }
+                
+            } else { 
+                alert('No soporta LocalStorage. Use Chrome o Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnFacturas").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                   
+                localStorage.clear();
+
+                var desde = generateFirstDateActualMonth();
+                var hasta = generateTodayDateDMY();
+                var filtro = 3;
+
+                var objDatos = {
+                    "desde" : desde,
+                    "hasta" : hasta,
+                    "filtro" : filtro
+                }
+
+                var objDatos_stringified = JSON.stringify(objDatos);
+                localStorage.setItem('objDatos', objDatos_stringified);                
+            } else { 
+                alert('No soporta LocalStorage. Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnConjuntoAlta").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                const storage = localStorage;
+                // console.log(storage.length);                   
+                   
+                localStorage.clear();
+
+                var MsjExito = {msj: "no"};
+                const MsjExito_str = JSON.stringify(MsjExito);
+                localStorage.setItem('MsjExito', MsjExito_str);
+                // }
+                
+            } else { 
+                alert('No soporta LocalStorage. Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnRemitos").on("click", function (){
+            if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                const storage = localStorage;
+                // console.log(storage.length);                   
+                   
+                localStorage.clear();
+
+                const myDate = new Date(); 
+                myDate.setFullYear(myDate.getFullYear());
+                day = myDate.getDate();
+                if (day<10)
+                    day = "0"+day;
+                month = myDate.getMonth()+1;
+                if (month<10)
+                    month = "0"+month
+                Today = day + "/" + month + "/" + myDate.getFullYear();
+                PrimeroDeMes = "01/"+month+'/'+myDate.getFullYear();
+
+                var objDatos = {"fecha_01": PrimeroDeMes, "fecha_hoy": Today, "id_prov": 0, "estado": 0}
+
+                var objDatos_stringified = JSON.stringify(objDatos);
+
+                // if (storage.length == 0){
+                storage.setItem('objDatos', objDatos_stringified);
+                // }
+                
+            } else { 
+                alert('No soporta LocalStorage. Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnHerramientas").on("click", function (){
+           if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                localStorage.clear();
+
+                var myDate = new Date(); 
+                myDate.setFullYear(myDate.getFullYear());
+                year = myDate.getFullYear();
+                month = myDate.getMonth()+1;
+                day = myDate.getDate();
+                if (month<10)
+                    month = "0"+month;
+                if (day<10)
+                    day = "0"+day;
+                const first = "01/"+month+"/"+year;
+                const today = day+"/"+month+"/"+year;
+
+                var objFechas = {"desde": first, "hasta": today, "denominacion": ''}
+
+                var objFechas_stringified = JSON.stringify(objFechas);
+
+                // if (storage.length == 0){
+                localStorage.setItem('objFechas', objFechas_stringified);
+                // }
+                
+            } else { 
+                alert('No soporta LocalStorage. Use Chrome o Actualize el navegador !!'); 
+            }
+        });
+
+        $("#btnInformeFF").on("click", function (){
+           if('localStorage' in window && window['localStorage'] !== null) {
+                console.log('Genial, tenemos un navegador decente que soporta LocalStorage');
+                localStorage.clear();
+
+                var myDate = new Date(); 
+                myDate.setFullYear(myDate.getFullYear());
+                year = myDate.getFullYear();
+                month = myDate.getMonth()+1;
+                day = myDate.getDate();
+                if (month<10)
+                    month = "0"+month;
+                if (day<10)
+                    day = "0"+day;
+                const first = "01/"+month+"/"+year;
+                const today = day+"/"+month+"/"+year;
+
+                var objFechas = {"desde": first, "hasta": today, "codigo": 'ingresos'}
+
+                var objFechas_stringified = JSON.stringify(objFechas);
+
+                // if (storage.length == 0){
+                localStorage.setItem('objFechas', objFechas_stringified);
+                // }
+                
+            } else { 
+                alert('No soporta LocalStorage. Use Chrome o Actualize el navegador !!'); 
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.datepicker{
+	width: 102px;
+	text-align: center;
+}
+
+.time, #operarios_hrstotal{
+	width:80px;
+	text-align: center;
+}

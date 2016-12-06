@@ -1,0 +1,73 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'i',
+1 verbose cli   'graphicmetrics' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'graphicmetrics', null ]
+7 verbose cache add name=undefined spec="graphicmetrics" args=["graphicmetrics",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'graphicmetrics',
+8 verbose parsed url   path: 'graphicmetrics',
+8 verbose parsed url   href: 'graphicmetrics' }
+9 silly lockFile 7c723992-graphicmetrics graphicmetrics
+10 verbose lock graphicmetrics C:\Users\Marcos\AppData\Roaming\npm-cache\7c723992-graphicmetrics.lock
+11 silly lockFile 7c723992-graphicmetrics graphicmetrics
+12 silly lockFile 7c723992-graphicmetrics graphicmetrics
+13 verbose addNamed [ 'graphicmetrics', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile 8c2b15ff-graphicmetrics graphicmetrics@
+16 verbose lock graphicmetrics@ C:\Users\Marcos\AppData\Roaming\npm-cache\8c2b15ff-graphicmetrics.lock
+17 silly addNameRange { name: 'graphicmetrics', range: '*', hasData: false }
+18 verbose request where is /graphicmetrics
+19 verbose request registry https://registry.npmjs.org/
+20 verbose request id 4140761821c4fb0c
+21 verbose url raw /graphicmetrics
+22 verbose url resolving [ 'https://registry.npmjs.org/', './graphicmetrics' ]
+23 verbose url resolved https://registry.npmjs.org/graphicmetrics
+24 verbose request where is https://registry.npmjs.org/graphicmetrics
+25 info trying registry request attempt 1 at 18:38:18
+26 http GET https://registry.npmjs.org/graphicmetrics
+27 http 404 https://registry.npmjs.org/graphicmetrics
+28 silly registry.get cb [ 404,
+28 silly registry.get   { 'content-type': 'application/json',
+28 silly registry.get     'cache-control': 'max-age=0',
+28 silly registry.get     'content-length': '2',
+28 silly registry.get     'accept-ranges': 'bytes',
+28 silly registry.get     date: 'Wed, 29 Jun 2016 21:38:22 GMT',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     age: '0',
+28 silly registry.get     connection: 'keep-alive',
+28 silly registry.get     'x-served-by': 'cache-atl6232-ATL',
+28 silly registry.get     'x-cache': 'MISS',
+28 silly registry.get     'x-cache-hits': '0',
+28 silly registry.get     'x-timer': 'S1467236302.367177,VS0,VE85',
+28 silly registry.get     vary: 'Accept-Encoding' } ]
+29 silly lockFile 8c2b15ff-graphicmetrics graphicmetrics@
+30 silly lockFile 8c2b15ff-graphicmetrics graphicmetrics@
+31 error 404 Not Found
+31 error 404
+31 error 404 'graphicmetrics' is not in the npm registry.
+31 error 404 You should bug the author to publish it
+31 error 404 It was specified as a dependency of 'Evhsa'
+31 error 404
+31 error 404 Note that you can also install from a
+31 error 404 tarball, folder, or http url, or git url.
+32 error System Windows_NT 6.1.7601
+33 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "i" "graphicmetrics"
+34 error cwd D:\Proyectos\Evhsa
+35 error node -v v0.10.32
+36 error npm -v 1.4.28
+37 error code E404
+38 verbose exit [ 1, true ]

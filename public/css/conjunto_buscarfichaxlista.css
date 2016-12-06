@@ -1,0 +1,8 @@
+#codigo_letra {
+	width: 40px;
+	text-transform: uppercase;
+}
+
+#codigo_num_grupo, #codigo_num_repuesto {
+	width: 50px;
+}

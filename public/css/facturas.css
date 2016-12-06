@@ -1,0 +1,11 @@
+.hidders{
+	display: none;
+}
+
+#nro_comprobante{
+	text-transform: uppercase;
+}
+
+.form-control{
+	width: 50%;
+}

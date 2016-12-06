@@ -1,0 +1,23 @@
+.ingresos tr th,
+.ingresos tr td {
+	text-align: center;
+}
+
+.ingresos tr th {
+    padding-bottom: 0px !important;
+    padding-top: 18px !important;
+    padding-right: 0px;
+    padding-left: 0px;
+
+}
+
+.ingresos tr th h2,
+.ingresos tr td h2 {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.ingresos tr th h4 {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
