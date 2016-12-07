@@ -3,6 +3,7 @@ const cAdmin        = require('./controllers/cAdmin');
 const cComercios    = require('./controllers/cComercios');
 const cRubros       = require('./controllers/cRubros');
 const cRubrosGrupos = require('./controllers/cRubrosGrupos');
+const cOfertas      = require('./controllers/cOfertas');
 
 function logout (req, res) {
 	console.log(req.cookies);
@@ -179,19 +180,23 @@ module.exports = function(app) {
 		app.get("/comercios_modificar/:id", auth, cComercios.getModificar);
 		app.post("/comercios_modificar", auth, cComercios.postModificar);
 		app.get("/comercios_borrar/:id", auth, cComercios.getDel);
+	//ofertas
+		app.get("/ofertas_lista/:id_comercio", auth, cOfertas.getLista);
+		app.get("/ofertas_alta", auth, cOfertas.getAlta);
+		app.post("/ofertas_alta", auth, cOfertas.postAlta);
 	//rubros
-		app.get('/rubroslista', auth, acceso, cRubros.getLista);
-		app.get('/rubrosalta', auth, acceso, cRubros.getAlta);
-		app.post('/rubrosalta', auth, cRubros.postAlta);
-		app.get('/rubrosmodificar/:id', auth, acceso, cRubros.getModificar);
-		app.post('/rubrosmodificar', auth, cRubros.postModificar);
-		app.get('/rubrosborrar/:id', auth, acceso, cRubros.getDel);
+		app.get('/rubros_lista', auth, cRubros.getLista);
+		app.get('/rubros_alta', auth, cRubros.getAlta);
+		app.post('/rubros_alta', auth, cRubros.postAlta);
+		app.get('/rubros_modificar/:id', auth, cRubros.getModificar);
+		app.post('/rubros_modificar', auth, cRubros.postModificar);
+		app.get('/rubros_borrar/:id', auth, cRubros.getDel);
 		app.get('/getRubrosPorGrupo/:id_grupo', auth, cRubros.getRubrosPorGrupo);
 	//grupos de rubros
-		app.get('/rubrosgruposlista', auth, acceso, cRubrosGrupos.getLista);
-		app.get('/rubrosgruposalta', auth, acceso, cRubrosGrupos.getAlta);
-		app.post('/rubrosgruposalta', auth, cRubrosGrupos.postAlta);
-		app.get('/rubrosgruposmodificar/:id', auth, acceso, cRubrosGrupos.getModificar);
-		app.post('/rubrosgruposmodificar', auth, cRubrosGrupos.postModificar);
-		app.get('/rubrosgruposborrar/:id', auth, acceso, cRubrosGrupos.getDel);
+		app.get('/rubrosgrupos_lista', auth, acceso, cRubrosGrupos.getLista);
+		app.get('/rubrosgrupos_alta', auth, acceso, cRubrosGrupos.getAlta);
+		app.post('/rubrosgrupos_alta', auth, cRubrosGrupos.postAlta);
+		app.get('/rubrosgrupos_modificar/:id', auth, acceso, cRubrosGrupos.getModificar);
+		app.post('/rubrosgrupos_modificar', auth, cRubrosGrupos.postModificar);
+		app.get('/rubrosgrupos_borrar/:id', auth, acceso, cRubrosGrupos.getDel);
 };

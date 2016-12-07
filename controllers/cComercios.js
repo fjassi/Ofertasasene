@@ -32,8 +32,12 @@ function postAlta(req, res){
 	const params = req.body;
 	const nombre = params.nombre;
 	const rubro = params.rubro;
+	const direccion = params.direccion;
+	const telefono = params.telefono;
+	const link = params.link;
+	const posicion = params.posicion;
 
-	mComercios.insert(nombre, rubro, function(){
+	mComercios.insert(nombre, rubro, direccion, telefono, link, posicion, function(){
 		res.redirect("comercios_lista");
 	});
 }
@@ -58,8 +62,12 @@ function postModificar(req, res){
 	const id = params.id;
 	const nombre = params.nombre;
 	const rubro = params.rubro;
-
-	mComercios.update(id, nombre, rubro, function(){
+	const direccion = params.direccion;
+	const telefono = params.telefono;
+	const link = params.link;
+	const posicion = params.posicion;
+	
+	mComercios.update(id, nombre, rubro, direccion, telefono, link, posicion, function(){
 		res.redirect("comercios_lista");
 	});
 }

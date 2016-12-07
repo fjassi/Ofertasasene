@@ -12,7 +12,7 @@ module.exports = {
 function getLista(req, res) {
   	mRubrosGrupos.getAll(function (rubros){
   		res.render('rubrosgruposlista', {
-			pagename: 'Archivo de Grupos de Rubros',
+			pagename: 'Lista de Grupos de Rubros',
 			rubros: rubros
 		});
   	});

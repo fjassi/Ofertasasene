@@ -1,5 +1,4 @@
 var mRubros = require('../models/mRubros');
-var mRubrosGrupos = require('../models/mRubrosGrupos');
 
 module.exports = {
 	getLista: getLista,
@@ -13,133 +12,58 @@ module.exports = {
 
 function getLista(req, res) {
   	mRubros.getAll(function (rubros){
-  		res.render('rubroslista', {
-			pagename: 'Archivo de Rubros',
+  		res.render('rubros_lista', {
+			pagename: 'Lista de Rubros',
 			rubros: rubros
 		});
   	});
 }
 
 function getAlta(req, res){
-	mRubrosGrupos.getAll(function (grupos){
-		res.render('rubrosalta', {
-			pagename: 'Alta de Rubro',
-			grupos: grupos
-		});
+	res.render('rubros_alta', {
+		pagename: 'Alta de Rubro'
 	});
 }
 
 
 function postAlta(req, res){
-	params = req.body;
-	codigo1 = params.codigo1;
-	codigo2 = params.codigo2;
-	nombre = params.nombre;
-	grupo = params.grupo;
-	codigo = codigo1+codigo2;
-
-	mRubros.getByCodigo(codigo, function (rubrosporcodigo){
-		if (rubrosporcodigo[0]==null){
-			mRubros.insert(codigo, nombre, grupo, function(){
-				res.redirect('rubroslista');
-			});
-		}else{
-			res.render('error', {
-      			error: "Codigo de Rubro existente. Intente con otro Codigo."
-      		});
-      	}
+	const params = req.body;
+	var nombre = params.nombre;
+	
+	mRubros.insert(nombre, function(){
+		res.redirect('rubros_lista');
 	});
 }
 
 function getModificar(req, res){
-	params = req.params;
-	id = params.id;
-	mRubrosGrupos.getAll(function (grupos){
-		mRubros.getById(id, function (rubro){
-			codigo = rubro[0].codigo;
-			codigo1 = codigo.substring(0, 1);
-			codigo2 = codigo.substring(1, 4);
-			res.render('rubrosmodificar',{
-				pagename: 'Modificar Rubro',
-				rubro: rubro[0],
-				grupos: grupos,
-				codigo1: codigo1,
-				codigo2: codigo2
-			});
+	const params = req.params;
+	const id = params.id;
+
+	mRubros.getById(id, function (rubro){
+		res.render('rubros_modificar',{
+			pagename: 'Modificar Rubro',
+			rubro: rubro[0]
 		});
 	});
 }
 
 function postModificar(req, res){
-	params = req.body;
-	id = params.id;
-	codigo1 = params.codigo1;
-	codigo2 = params.codigo2;
-	nombre = params.nombre;
-	grupo = params.grupo;
-	codigo = codigo1+codigo2;
+	const params = req.body;
+	const id = params.id;
+	const nombre = params.nombre;
 
-	mRubros.getByCodigo(codigo, function (rubrosporcodigo){
-		if (rubrosporcodigo.length == 0){
-			mRubros.update(id, codigo, nombre, grupo, function(){
-				res.redirect('rubroslista');
-			});
-		}else{
-			if (rubrosporcodigo.length == 1){
-				if (rubrosporcodigo[0].id == id){
-					mRubros.update(id, codigo, nombre, grupo, function(){
-						res.redirect('rubroslista');
-					});
-				}else{				
-					res.render('error', {
-		      			error: "Codigo de Rubro existente. Intente con otro Codigo."
-		      		});
-		      	}
-			}else{
-				var aparece = false;
-				for (var i = 0 ; i < rubrosporcodigo.length ; i++) {
-					if (rubrosporcodigo[i].id == id){
-						console.log(i+": aca está!")
-						aparece = true;
-						break;
-					}else{
-						console.log(i+": aca no está.")
-					}
-				}
-				if (aparece) {
-					res.render('error', {
-		      			error: "Codigo de Rubro existente. Intente con otro Codigo."
-		      		});
-				}else{
-					res.render('error', {
-		      			error: "Codigo de Rubro existente. Intente con otro Codigo.."
-		      		});
-				}
-			}			
-      	}
-	});	
+	mRubros.update(id, nombre, function(){
+		res.redirect('rubros_lista');
+	});
 }
 
 function getDel(req, res){
 	var params = req.params;
 	var id = params.id;
-	mRubros.getById(id, function (rubro){
-	  	rubro = rubro[0];
-	  	mRepuestos.getRubroEnRepById(id, function (rubroEnRep){
-	  		// console.log(rubroEnRep.length)
-	  		if (rubroEnRep.length == 0){
-	  			mBorro.add(req.session.user.usuario,"Rubro", "Borra. Nombre Rubro: "+ rubro.nombre + ", id: " + id ,function(){
-			  		mRubros.del(id, function(){
-			    		res.redirect('/rubroslista'); 
-			  		});
-				});
-	  		}else{
-	  			res.render('error', {
-	      			error: "No se puede eliminar este Rubro. Posee registros en la base de datos 'Repuestos'."
-	      		});
-	  		}
-	  	});
-	}); 
+
+	mRubros.del(id, function(){
+		res.redirect('/rubros_lista'); 
+	});				
 }
 
 function getRubrosPorGrupo(req, res){
@@ -149,6 +73,5 @@ function getRubrosPorGrupo(req, res){
 	mRubros.getCantRubrosPorGrupo(id_grupo, function (cant){
 		console.log(cant)
 		res.send(cant);
-
 	});
 }
