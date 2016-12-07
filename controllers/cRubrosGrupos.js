@@ -1,8 +1,4 @@
-//requiriendo modelo mensaje.js:
 var mRubrosGrupos = require('../models/mRubrosGrupos');
-var mBorro = require('../models/mBorro');
-// var mVerificacion = require('../models/mVerificacion');
-var mAyuda = require('../models/mAyuda');
 
 module.exports = {
 	getLista: getLista,
@@ -14,7 +10,6 @@ module.exports = {
 }
 
 function getLista(req, res) {
-	req.session.nromenu = 3;
   	mRubrosGrupos.getAll(function (rubros){
   		res.render('rubrosgruposlista', {
 			pagename: 'Archivo de Grupos de Rubros',
@@ -29,10 +24,9 @@ function getAlta(req, res){
 	});
 }
 
-
 function postAlta(req, res){
 	params = req.body;
-	codigo= params.codigo;
+	codigo = params.codigo;
 	nombre = params.nombre;
 	mRubrosGrupos.getByCodigo(codigo, function (grupoderubrosporcodigo){
 		if (grupoderubrosporcodigo[0]==null){
@@ -73,12 +67,10 @@ function getDel(req, res){
 	var params = req.params;
 	var id = params.id;
 	mRubrosGrupos.getById(id, function (rubro){
-	  	rubro = rubro[0];
-		mBorro.add(req.session.user.usuario,"RubroGrupo", "Borra. Nombre Grupo de Rubro: "+ rubro.nombre + ", id: " + id ,function(){
-	  		mRubrosGrupos.del(id, function(){
-	    		res.redirect('/rubrosgruposlista'); 
-	  		});
-		});
+	  	rubro = rubro[0];		
+  		mRubrosGrupos.del(id, function(){
+    		res.redirect('/rubrosgruposlista'); 
+  		});
 	}); 
 }
 

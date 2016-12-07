@@ -1,0 +1,52 @@
+{% extends 'template.html' %}
+
+{% block title %}
+	{{ pagename }}
+{% endblock %}
+
+{% block content %}
+<h2>{{ pagename }}</h2>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  	<div class="panel-heading">
+  	<!-- Table -->
+		<table>
+			<tr>
+				<td><button type="button" class="btn btn-primary" onclick="history.back();">Atras</button></td>
+				<td><a href="/comercios_alta"><button type="button" class="btn btn-success menu" data-idmenu="2" data-accion="a">Agregar Nuevo</button></a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="mainHolder" style="overflow: scroll; max-height: 600px;">
+				<table class="table table-striped">
+			  		<thead>
+			  			<tr>
+			  				<th colspan="2">Opciones</th>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Rubro</th>
+							<th>Logo</th>
+							<th>Banner</th>
+						</tr>
+			  		</thead>
+			  		<tbody>
+			  			{% for c in comercios %}
+							<tr>
+								<td><a href="/comercios_modificar/{{ c.id }}"><button class="btn btn-warning">Modificar</button></a></td>
+								<td><a href='/comercios_borrar/{{ c.id }}' onclick="if (!confirm('¿Seguro desea eliminar?')) return false;"><button type="button" class="btn btn-danger" >Eliminar</button><a/></td>
+								<td>{{ c.id }}</td>
+								<td>{{ c.nombre }}</td>
+								<td>{{ c.rubrotxt }}</td>
+								<td>{{ c.path_logo }}</td>
+								<td>{{ c.path_banner }}</td>
+							</tr>
+						{% endfor %}
+			  		</tbody>
+				</table>
+			</div>
+		</div><!--div col xs12 -->
+	</div><!--div row -->
+</div>
+{% endblock %}

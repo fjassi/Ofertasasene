@@ -1,6 +1,4 @@
 var conn = require('../config/db').conn;
-var mEventos = require('../models/mEventos');
-var mAgenda = require('../models/mAgenda');
 
 module.exports = {
 	getLogin: getLogin,
@@ -25,7 +23,7 @@ function changeDate2(date){
 function getLogin(req, res){
 	//console.log('ADENTRO DE GET LOGIN')
 	res.render('login',{
-		pagename: 'Evhsa Login',
+		pagename: 'Login',
 		errors: req.session.errors,
 	});
 }
@@ -38,63 +36,36 @@ function postLogin(req, res){
 	//console.log('ADENTRO DE POST LOGIN')
 	var form = req.body;
 	console.log(form)
-	if (form.email && form.password){
-		conn("select * from secr where mail = rtrim('"+ form.email +"')", function (user){
+	if (form.nombre && form.password){
+		conn("select * from secr where nombre = rtrim('"+ form.nombre +"')", function (user){
 			user = user[0];
 			console.log(user)
 			if (user) {
-				if (user.clave === form.password) {
-					if ( entreFechas(user.alta, user.baja) ) {
-						if (user.activa == 1){
-							// req.session.user = null;
-							req.session.user = user;
-							req.session.auth = true;
+				if (user.password === form.password) {
+					// req.session.user = null;
+					req.session.user = user;
+					req.session.auth = true;
 
-							date = new Date()
-							day = date.getDate();
-							if (day<10)
-								day = "0"+day;
-							month = (date.getMonth() + 1);
-							if (month<10)
-								month = "0"+month;
-							date = date.getFullYear() + '/' + month + '/' +  day;
-							req.session.user.horaLogin = date;
+					date = new Date()
+					day = date.getDate();
+					if (day<10)
+						day = "0"+day;
+					month = (date.getMonth() + 1);
+					if (month<10)
+						month = "0"+month;
+					date = date.getFullYear() + '/' + month + '/' +  day;
+					req.session.user.horaLogin = date;
 
-							mEventos.add(req.session.user.unica, date, "Login", "", function(){
-							   	var today = new Date();
-							    var dd = today.getDate();
-							    var mm = today.getMonth()+1; //January is 0!
-							    var yyyy = today.getFullYear();
-
-							    if(dd<10) {
-							        dd='0'+dd
-							    } 
-
-							    if(mm<10) {
-							        mm='0'+mm
-							    } 
-
-							    hoy = yyyy+'/'+mm+'/'+dd;
-							    res.redirect("/inicio");
-							});
-						}else{
-							res.redirect('/')
-						}
-					} else {
-						res.redirect('/')
-					}
+					res.redirect("/inicio");
 				}else{
 					res.render('error', {
 						error: "Usuario o Contraseña incorrectos."
 					});
-				} 
+				}
 			}else{
 				res.render('error', {
 					error: "Usuario o Contraseña incorrectos."
 				});
-				// req.session.errors = 'Usuario o Contraseña incorrectos.';
-				// console.log("sarasa")
-				// return res.redirect('/');
 			}
 		});
 	} else {
@@ -104,20 +75,13 @@ function postLogin(req, res){
 }
 
 function entreFechas (alta, baja) {
-
 	if ( new Date(alta).getTime() < new Date().getTime() ) {
-
 		if ( new Date(baja).getTime() > new Date().getTime() ) {
-
 			return true;
-
 		} else {
-
 			return false;
 		}
-
 	} else {
 		return false;
 	}
-
 }

@@ -1,10 +1,5 @@
-//requiriendo modelo mensaje.js:
 var mRubros = require('../models/mRubros');
-var mBorro = require('../models/mBorro');
-// var mVerificacion = require('../models/mVerificacion');
-var mAyuda = require('../models/mAyuda');
 var mRubrosGrupos = require('../models/mRubrosGrupos');
-var mRepuestos = require('../models/mRepuestos');
 
 module.exports = {
 	getLista: getLista,
@@ -17,7 +12,6 @@ module.exports = {
 }
 
 function getLista(req, res) {
-	req.session.nromenu = 3;
   	mRubros.getAll(function (rubros){
   		res.render('rubroslista', {
 			pagename: 'Archivo de Rubros',
