@@ -1,0 +1,52 @@
+{% extends 'template.html' %}
+
+{% block title %}
+	{{ pagename }}
+{% endblock %}
+
+{% block content %}
+<link href="/css/file.css" rel="stylesheet">
+<h2>{{ pagename }}</h2>
+<div class="panel panel-default">
+	<form method="post" id="formalta" action="/categorias_alta" class="form-inline" enctype="multipart/form-data">
+		<table align="center" class="table table-striped">
+			<tr>
+				<td>Nombre:</td>
+				<td><input style="max-width: 500px;" type="text" id="nombre" name="nombre" required class="form-control"><div class="aviso">Quedan <span id="charsLeftNombre"></span> caraceteres.</div></td>
+			</tr>
+			
+			<tr>
+				<td>Texto:</td>
+				<td><input style="max-width: 500px;" type="text" id="texto" name="texto" required class="form-control"><div class="aviso">Quedan <span id="charsLeftTexto"></span> caraceteres.</div></td>
+			</tr>
+			<tr>
+				<td>Imagen:</td>
+				<td>
+					<span class="btn btn-success btn-file">
+				    Cargar imagen <input type="file" name="avatar" id="avatar">
+					</span><input type="text" id="link" name="link" required class="form-control" style="" readonly>
+				</td>
+			</tr>	
+			<tr>
+				<td><input type="button" value="Atras" onclick="history.back()" class="btn btn-default"></td>
+				<td><input type="submit" value="Agregar" class="btn btn-default"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.limit-1.2.js"></script>
+<script type="text/javascript">
+	$('#texto').limit('20','#charsLeftTexto');
+	$('#nombre').limit('45','#charsLeftNombre');
+	$('#link').limit('100','#charsLeftLink');	
+	$(function() {});
+	$('#avatar').change(function() {
+        var filename = $('#avatar')[0].files[0];
+	        filename ="uploads/product-"+filename.name;
+        // console.log(filename);
+        $('#link').val(filename);
+    });
+</script>
+
+{% endblock %}

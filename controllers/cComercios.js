@@ -1,5 +1,5 @@
 const mComercios = require('../models/mComercios');
-const mRubros = require('../models/mRubros');
+const mCategoria = require('../models/mCategorias');
 
 module.exports = {
 	getLista: getLista,
@@ -20,10 +20,10 @@ function getLista(req, res) {
 }
 
 function getAlta(req, res){
-	mRubros.getAll(function(rubros){
+	mCategoria.getAll(function(categoria){
 		res.render("comercios_alta", {
 			pagename: "Alta de Comercio",
-			rubros: rubros
+			categoria: categoria
 		});
 	});
 }
@@ -31,13 +31,14 @@ function getAlta(req, res){
 function postAlta(req, res){
 	const params = req.body;
 	const nombre = params.nombre;
-	const rubro = params.rubro;
+	const path_logo = params.path_logo;
+	const path_banner = params.path_banner;
 	const direccion = params.direccion;
 	const telefono = params.telefono;
 	const link = params.link;
 	const posicion = params.posicion;
 
-	mComercios.insert(nombre, rubro, direccion, telefono, link, posicion, function(){
+	mComercios.insert(nombre, path_logo, path_banner, direccion, telefono, link, posicion, function(){
 		res.redirect("comercios_lista");
 	});
 }
@@ -46,12 +47,12 @@ function getModificar(req, res){
 	const params = req.params;
 	const id = params.id;
 
-	mRubros.getAll(function(rubros){
+	mCategoria.getAll(function(categoria){
 		mComercios.getById(id, function(comercio){
 			res.render("comercios_modificar", {
 				pagename: "Modificar Comercio",
 				comercio: comercio[0],
-				rubros: rubros
+				categoria: categoria
 			});
 		});
 	});	
@@ -61,13 +62,19 @@ function postModificar(req, res){
 	const params = req.body;
 	const id = params.id;
 	const nombre = params.nombre;
-	const rubro = params.rubro;
+	const path_logo = params.path_logo;
+	const path_banner = params.path_banner;
 	const direccion = params.direccion;
 	const telefono = params.telefono;
 	const link = params.link;
 	const posicion = params.posicion;
+	var activo = params.activo;
+	if(activo == "on")
+		activo = 1;
+	else
+		activo = 0;
 	
-	mComercios.update(id, nombre, rubro, direccion, telefono, link, posicion, function(){
+	mComercios.update(id, nombre, path_logo, path_banner, direccion, telefono, link, posicion, activo, function(){
 		res.redirect("comercios_lista");
 	});
 }

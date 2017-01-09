@@ -1,9 +1,52 @@
 const cIndex        = require('./controllers/cIndex');
 const cAdmin        = require('./controllers/cAdmin');
 const cComercios    = require('./controllers/cComercios');
-const cRubros       = require('./controllers/cRubros');
-const cRubrosGrupos = require('./controllers/cRubrosGrupos');
-const cOfertas      = require('./controllers/cOfertas');
+const cCategorias       = require('./controllers/cCategorias');
+const cCategoriasGrupos = require('./controllers/cCategoriasGrupos');
+const cProductos      = require('./controllers/cProductos');
+
+var multer  = require('multer');
+// var upload = multer({ dest: 'uploads/' });
+
+var storage = multer.diskStorage({
+ destination: function (req, file, callback) {
+   callback(null, './uploads');
+ },
+ filename: function (req, file, callback) {
+
+   callback(null, 'product-'+file.originalname);
+
+ }
+});
+
+var upload = multer({ storage : storage}).single('avatar');
+var uploadm = multer({storage : storage}).array('avata',2);
+
+function subir(req,res, next){
+ upload(req,res,function(err) {
+   if(err) {
+   	console.log("Archivo no subido");
+     return res.end("Error uploading file.");
+   }else{
+	   console.log("Archivo subido");
+	   return next();
+   }
+ });
+}
+
+function subirmulti (req, res, next){
+	uploadm(req, res, function(err){
+		if(err) {
+   	console.log("Archivo no subido");
+     return res.end("Error uploading file.");
+   }else{
+	   console.log("Archivo subido");
+	   return next();
+   }
+	});
+}
+
+
 
 function logout (req, res) {
 	console.log(req.cookies);
@@ -15,7 +58,7 @@ function logout (req, res) {
 	if (month<10)
 		month = "0" + month;
 	fecha = fecha.getFullYear() + "/"+month+"/"+day+" "+fecha.getHours()+":"+fecha.getMinutes()
-	mEventos.add(req.session.user.unica, fecha, "Logout", "", function(){
+	// mEventos.add(req.session.user.unica, fecha, "Logout", "", function(){
 		req.session.destroy(function (err) {
 			console.log("session destroyed executed")
 			if (!err){
@@ -25,7 +68,7 @@ function logout (req, res) {
 		 		console.log(err);
 		 	}
 		});	
-	});	
+	// });	
 }
 
 // Verifica que este logueado
@@ -176,27 +219,30 @@ module.exports = function(app) {
 	//comercios
 		app.get("/comercios_lista", auth, cComercios.getLista);
 		app.get("/comercios_alta", auth, cComercios.getAlta);
-		app.post("/comercios_alta", auth, cComercios.postAlta);
+		app.post("/comercios_alta", auth, subirmulti, cComercios.postAlta);
 		app.get("/comercios_modificar/:id", auth, cComercios.getModificar);
-		app.post("/comercios_modificar", auth, cComercios.postModificar);
+		app.post("/comercios_modificar", auth, subirmulti, cComercios.postModificar);
 		app.get("/comercios_borrar/:id", auth, cComercios.getDel);
-	//ofertas
-		app.get("/ofertas_lista/:id_comercio", auth, cOfertas.getLista);
-		app.get("/ofertas_alta", auth, cOfertas.getAlta);
-		app.post("/ofertas_alta", auth, cOfertas.postAlta);
-	//rubros
-		app.get('/rubros_lista', auth, cRubros.getLista);
-		app.get('/rubros_alta', auth, cRubros.getAlta);
-		app.post('/rubros_alta', auth, cRubros.postAlta);
-		app.get('/rubros_modificar/:id', auth, cRubros.getModificar);
-		app.post('/rubros_modificar', auth, cRubros.postModificar);
-		app.get('/rubros_borrar/:id', auth, cRubros.getDel);
-		app.get('/getRubrosPorGrupo/:id_grupo', auth, cRubros.getRubrosPorGrupo);
-	//grupos de rubros
-		app.get('/rubrosgrupos_lista', auth, acceso, cRubrosGrupos.getLista);
-		app.get('/rubrosgrupos_alta', auth, acceso, cRubrosGrupos.getAlta);
-		app.post('/rubrosgrupos_alta', auth, cRubrosGrupos.postAlta);
-		app.get('/rubrosgrupos_modificar/:id', auth, acceso, cRubrosGrupos.getModificar);
-		app.post('/rubrosgrupos_modificar', auth, cRubrosGrupos.postModificar);
-		app.get('/rubrosgrupos_borrar/:id', auth, acceso, cRubrosGrupos.getDel);
+	//productos
+		app.get("/productos_lista/:id_comercio", auth, cProductos.getLista);
+		app.get("/productos_alta/:id_comercio", auth, cProductos.getAlta);
+		app.post("/productos_alta", auth, subir, cProductos.postAlta);
+		app.get("/productos_modificar/:id", auth, cProductos.getModificar);
+		app.post("/productos_modificar", auth, subir, cProductos.postModificar);
+		app.get("/productos_borrar/:id", auth, cProductos.getDel);
+	//categorias
+		app.get('/categorias_lista', auth, cCategorias.getLista);
+		app.get('/categorias_alta', auth, cCategorias.getAlta);
+		app.post('/categorias_alta', auth, subir, cCategorias.postAlta);
+		app.get('/categorias_modificar/:id', auth, cCategorias.getModificar);
+		app.post('/categorias_modificar', auth, subir, cCategorias.postModificar);
+		app.get('/categorias_borrar/:id', auth, cCategorias.getDel);
+		app.get('/getCategoriasPorGrupo/:id_grupo', auth, cCategorias.getCategoriasPorGrupo);
+	//grupos de Categorias
+		app.get('/categoriasgrupos_lista', auth, acceso, cCategoriasGrupos.getLista);
+		app.get('/categoriasgrupos_alta', auth, acceso, cCategoriasGrupos.getAlta);
+		app.post('/categoriasgrupos_alta', auth, cCategoriasGrupos.postAlta);
+		app.get('/categoriasgrupos_modificar/:id', auth, acceso, cCategoriasGrupos.getModificar);
+		app.post('/categoriasgrupos_modificar', auth, cCategoriasGrupos.postModificar);
+		app.get('/categoriasgrupos_borrar/:id', auth, acceso, cCategoriasGrupos.getDel);
 };

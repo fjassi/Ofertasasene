@@ -5,49 +5,58 @@
 {% endblock %}
 
 {% block content %}
-<!-- <link href="/css/rubrosalta.css" rel="stylesheet"> -->
+<link href="/css/file.css" rel="stylesheet">
 <h2>{{ pagename }}</h2>
 <div class="panel panel-default">
-	<form method="post" id="formalta" action="/comercios_modificar">
+	<form method="post" id="formalta" action="/comercios_modificar" class="form-inline" enctype="multipart/form-data">
 		<input hidden name="id" value="{{ comercio.id }}">
 		<table align="center" class="table table-striped">
 			<tr>
-				<td>Rubro: </td>
-				<td>
-					<select id="rubro" name="rubro" class="form-control" style="width: auto !important;">
-						{% for r in rubros %}
-							{% if r.id == comercio.id_rubro_fk %}
-								<option value="{{ r.id }}" selected>{{ r.nombre }}</option>
-							{% else %}
-								<option value="{{ r.id }}">{{ r.nombre }}</option>
-							{% endif %}
-						{% endfor %}
-					</select>
-				</td>
-			</tr>
-			<tr>
 				<td>Nombre:</td>
-				<td><input type="text" id="nombre" name="nombre" required class="form-control" value="{{ comercio.nombre }}"><div class="aviso">Quedan <span id="charsLeftNombre"></span> caraceteres.</div></td>
+				<td><input style="max-width: 500px;" type="text" id="nombre" name="nombre" required class="form-control" value="{{ comercio.nombre }}"><div class="aviso">Quedan <span id="charsLeftNombre"></span> caraceteres.</div></td>
 			</tr>
+			
 			<tr>
 				<td>Direccion:</td>
-				<td><input type="text" id="direccion" name="direccion" required class="form-control" value="{{ comercio.direccion }}"><div class="aviso">Quedan <span id="charsLeftDireccion"></span> caraceteres.</div></td>
+				<td><input style="max-width: 500px;" type="text" id="direccion" name="direccion" required class="form-control" value="{{ comercio.direccion }}"><div class="aviso">Quedan <span id="charsLeftDireccion"></span> caraceteres.</div></td>
 			</tr>
 			<tr>
 				<td>Telefono:</td>
-				<td><input type="text" id="telefono" name="telefono" required class="form-control" value="{{ comercio.telefono }}"><div class="aviso">Quedan <span id="charsLeftTelefono"></span> caraceteres.</div></td>
+				<td><input style="max-width: 500px;" type="text" id="telefono" name="telefono" required class="form-control" value="{{ comercio.telefono }}" onKeyPress="return soloNumeros(event)"><div class="aviso">Quedan <span id="charsLeftTelefono"></span> caraceteres.</div></td>
 			</tr>
 			<tr>
 				<td>Link:</td>
-				<td><input type="text" id="link" name="link" required class="form-control" value="{{ comercio.link }}"><div class="aviso">Quedan <span id="charsLeftLink"></span> caraceteres.</div></td>
+				<td><input style="max-width: 500px;" type="text" id="link" name="link" required class="form-control" value="{{ comercio.link }}"><div class="aviso">Quedan <span id="charsLeftLink"></span> caraceteres.</div></td>
 			</tr>
 			<tr>
 				<td>Posicion:</td>
-				<td><input type="text" id="posicion" name="posicion" required class="form-control" maxlength="2" value="{{ comercio.posicion }}"></td>
+				<td><input style="max-width: 500px;" type="text" id="posicion" name="posicion" required class="form-control" maxlength="3" onKeyPress="return soloNumeros(event)" value="{{ comercio.posicion }}"></td>
 			</tr>
 			<tr>
-				<td><input type="button" value="Atras" onclick="history.back()"></td>
-				<td><input type="submit" value="Agregar"></td>
+				<td>Link logo:</td>
+				<td><span class="btn btn-success btn-file">
+				    Cargar imagen <input type="file" name='avata' id="avatar2">
+					</span><input style="max-width: 500px;" type="text" id="path_logo" name="path_logo" required class="form-control" value="{{ comercio.path_logo }}" disabled></td>
+			</tr>
+			<tr>
+				<td>Link Banner:</td>
+				<td><span class="btn btn-success btn-file">
+				    Cargar imagen <input type="file" name='avata' id="avatar1">
+					</span><input style="max-width: 500px;" type="text" id="path_banner" name="path_banner" required class="form-control" value="{{ comercio.path_banner }}" disabled></td>
+			</tr>
+			<tr>
+				<td>Activo:</td>
+				<td >
+					{% if comercio.activo == 1 %}
+            <input type="checkbox" checked  name="activo" id="activo">
+          {% else %}
+            <input type="checkbox" unchecked  name="activo" id="activo">
+          {% endif %} 
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="Atras" onclick="history.back()" class="btn btn-default"></td>
+				<td><input type="submit" value="guardar" class="btn btn-default"></td>
 			</tr>
 		</table>
 	</form>
@@ -59,6 +68,9 @@
 	$('#direccion').limit('50','#charsLeftDireccion');
 	$('#telefono').limit('15','#charsLeftTelefono');
 	$('#link').limit('20','#charsLeftLink');
+	$('#path_logo').limit('100','#charsLeftPath_logo');
+	$('#path_banner').limit('100','#charsLeftPath_banner');
+	$('#posicion').limit('3','#charsLeftPosicion');
 	
 	$(function() {
 

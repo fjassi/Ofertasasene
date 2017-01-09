@@ -1,0 +1,67 @@
+{% extends 'template.html' %}
+
+{% block title %}
+	{{ pagename }}
+{% endblock %}
+
+{% block content %}
+<link href="/css/file.css" rel="stylesheet">	
+<h2>{{ pagename }}</h2>
+<div class="panel panel-default">
+	<form method="POST" action="/categorias_modificar" class="form-inline" enctype="multipart/form-data">
+		<table align="center" class="table table-striped">
+			<tr hidden>
+				<td>ID: </td>
+				<td><input style="width: 400px;" type="text" id="id" name="id" value="{{ categoria.id }}" readonly class="form-control"></td>
+			</tr>
+			<tr>
+				<td>Nombre:</td>
+				<td><input style="width: 400px;"  type="text" id="nombre" name="nombre" value="{{ categoria.nombre }}" class="form-control" required><div class="aviso">Quedan <span id="charsLeftNombre"></span> caraceteres.</div></td>
+			</tr>
+			<tr>
+				<td>Texto:</td>
+				<td><input  style="width: 400px;" type="text" id="texto" name="texto" required class="form-control" value="{{ categoria.texto }}"><div class="aviso">Quedan <span id="charsLeftTexto"></span> caraceteres.</div></td>
+			</tr>
+			<tr>
+				<td>Link:</td>
+				<td>
+					<span class="btn btn-success btn-file">
+				    Cargar imagen <input type="file" name='avatar' id="avatar">
+					</span>
+					<input style="width: 400px;" type="text" id="link" name="link" required class="form-control" value="{{ categoria.path_imagen }}">
+				</td>
+			</tr>			
+			<tr>
+				<td>Activo:</td>
+				<td>
+					{% if categoria.activo == 1 %}
+            <input type="checkbox" checked  name="activo" id="activo">
+          {% else %}
+            <input type="checkbox" unchecked  name="activo" id="activo">
+          {% endif %} 
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="Atras" onclick="history.back()" class="btn btn-default"></td>
+				<td><input type="submit" value="Guardar" class="btn btn-default"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.limit-1.2.js"></script>
+<script type="text/javascript">
+	$('#texto').limit('20','#charsLeftTexto');
+	$('#nombre').limit('45','#charsLeftNombre');
+	$('#link').limit('100','#charsLeftLink');	
+	$(function() {
+
+	});
+	$('#avatar').change(function() {
+        var filename = $('#avatar')[0].files[0];
+	        filename ="uploads/product-"+filename.name;
+        // console.log(filename);
+        $('#link').val(filename);
+    });
+</script>
+{% endblock %}

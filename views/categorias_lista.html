@@ -11,10 +11,10 @@
   	<div class="panel-heading">
   	<!-- Table -->
 		<table>
-			<tr>
-				<td><button type="button" class="btn btn-primary" onclick="history.back();">Atras</button></td>
-				<td><a href="/comercios_alta"><button type="button" class="btn btn-success">Agregar Nuevo</button></a></td>
-			</tr>
+		<tr>	
+			<td><button type="button" class="btn btn-primary" onclick="history.back();">Atras</button></td>
+			<td><a href="/categorias_alta"><button type="button" class="btn btn-success" data-idmenu="2" data-accion="a">Agregar Nuevo</button></a></td>
+		</tr>	
 		</table>
 	</div>
 	<div class="row">
@@ -23,42 +23,35 @@
 				<table class="table table-striped">
 			  		<thead>
 			  			<tr>
-			  				<th colspan="3">Opciones</th>
+			  			<th colspan="2">Opciones</th>
 							<th hidden>ID</th>
 							<th>Nombre</th>
-							<th>Link Logo</th>
-							<th>Link Banner</th>
-							<th>Direccion</th>
 							<th>Link</th>
-							<th>Posicion</th>
-							<th>Activo</th>
+							<th>Texto</th>
+							<th style="text-align: center;">Activo</th>								
 						</tr>
 			  		</thead>
 			  		<tbody>
-			  			{% for c in comercios %}
+			  			{% for c in categorias %}
 							<tr>
-								<td><a href="/productos_lista/{{ c.id }}"><button class="btn btn-default">Productos</button></a></td>
-								<td><a href="/comercios_modificar/{{ c.id }}"><button class="btn btn-warning">Modificar</button></a></td>
-								<td><a href='/comercios_borrar/{{ c.id }}' onclick="if (!confirm('¿Seguro desea eliminar?')) return false;"><button type="button" class="btn btn-danger" >Eliminar</button><a/></td>
+								<td><a href="/categorias_modificar/{{ c.id }}"><button class="btn btn-warning menu" data-idmenu="2" data-accion="m">Modificar</button></a></td>
+								<td><a href='/categorias_borrar/{{ c.id }}' onclick="if (!confirm('¿Seguro desea eliminar?')) return false;"><button type="button" class="btn btn-danger">Eliminar</button><a/></td>
 								<td hidden>{{ c.id }}</td>
 								<td>{{ c.nombre }}</td>
-								<td>{{ c.path_logo }}</td>
-								<td>{{ c.path_banner }}</td>
-								<td>{{ c.direccion }}</td>
-								<td>{{ c.link }}</td>
-								<td>{{ c.posicion }}</td>
+								<td>{{ c.path_imagen }}</td>
+								<td>{{ c.texto }}</td>
 								<td style="text-align: center;">
 									{% if c.activo == 1 %}
 			            	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 			          	{% else %}
 			            	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 			          	{% endif %} 
-			          </td>
+			          </td>								
 							</tr>
 						{% endfor %}
 			  		</tbody>
 				</table>
-			</div>
+			</div>	
 		</div><!--div col xs12 -->
 	</div><!--div row -->
 </div>

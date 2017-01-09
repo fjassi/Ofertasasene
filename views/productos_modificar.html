@@ -1,0 +1,77 @@
+{% extends 'template.html' %}
+
+{% block title %}
+	{{ pagename }}
+{% endblock %}
+
+{% block content %}
+<link href="/css/file.css" rel="stylesheet">
+<h2>{{ pagename }}</h2>
+<div class="panel panel-default">
+	<form method="post" id="formalta" action="/productos_modificar" class="form-inline" enctype="multipart/form-data">
+		<input hidden name="id_comercio" id="id_comercio" value="{{ producto.id_comercio_fk }}">
+		<input hidden name="id" id="id" value="{{ producto.id }}">
+		<table align="center" class="table table-striped">
+			
+			<tr>
+				<td>Texto:</td>
+				<td><input style="max-width: 500px;" type="text" id="texto" name="texto" required class="form-control" value=" {{ producto.texto }}"><div class="aviso">Quedan <span id="charsLeftTexto"></span> caraceteres.</div></td>
+			</tr>
+			<tr>
+				<td>Precio:</td>
+				<td><input style="max-width: 500px;" type="text" id="precio" name="precio" required class="form-control" value=" {{ producto.precio }}" onkeypress="return Validate7EntY2Dec(event,this)"><div class="aviso">Quedan <span id="charsLeftPrecio"></span> caraceteres.</div></td>
+			</tr>
+			<tr>
+				<td>Categoria:</td>
+				<td>
+					<select class="form-control" name="id_categoria" style="width: auto;">
+						{% for c in categorias %}
+							{% if c.id == producto.id_comercio_fk %}
+                <option selected value="{{ c.id }}">{{ c.nombre }}</option>
+              {% else %}
+                <option value="{{ c.id }}">{{ c.nombre }}</option>
+              {% endif %}              
+            {% endfor %}
+					</select>
+			</tr>
+			<tr>
+				<td>Imagen del producto:</td>
+				<td>
+					<span class="btn btn-success btn-file">
+				    Cargar imagen <input type="file" name="avatar" id="avatar">
+					</span><input style="" type="text" id="link" name="link" required class="form-control" value=" {{ producto.path_imagen }}" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td>Activo:</td>
+				<td>
+					{% if producto.activo == 1 %}
+            <input type="checkbox" checked  name="activo" id="activo">
+          {% else %}
+            <input type="checkbox" unchecked  name="activo" id="activo">
+          {% endif %} 
+				</td>
+			</tr>
+			<tr>
+				<td><input type="button" value="Atras" onclick="history.back()" class="btn btn-default"></td>
+				<td><input type="submit" value="Guardar" class="btn btn-default"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.limit-1.2.js"></script>
+<script type="text/javascript">
+	$('#precio').limit('10','#charsLeftPrecio');
+	$('#texto').limit('20','#charsLeftTexto');
+	$(function() {
+	});
+	$('#avatar').change(function() {
+        var filename = $('#avatar')[0].files[0];
+	        filename ="uploads/product-"+filename.name;
+        // console.log(filename);
+        $('#link').val(filename);
+    });
+</script>
+
+{% endblock %}
