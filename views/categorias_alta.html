@@ -23,7 +23,8 @@
 				<td>
 					<span class="btn btn-success btn-file">
 				    Cargar imagen <input type="file" name="avatar" id="avatar">
-					</span><input type="text" id="link" name="link" required class="form-control" style="" readonly>
+					</span><input type="text" id="link" name="link" required class="form-control" readonly style="min-width: 400px;">
+					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
 				</td>
 			</tr>	
 			<tr>
@@ -43,8 +44,7 @@
     var filename = $('#avatar')[0].files[0];
       filename ="uploads/product-"+filename.name;
     // console.log(filename);
-    $('#link').val(filename);
-    });
+  $('#link').val(filename);
+  });
 </script>
-
 {% endblock %}

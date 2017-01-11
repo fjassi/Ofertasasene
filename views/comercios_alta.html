@@ -34,13 +34,17 @@
 				<td>Imagen logo:</td>
 				<td><span class="btn btn-success btn-file">
 				    Cargar imagen <input type="file" name='avata' id="avatar2">
-					</span><input style="max-width: 500px;" type="text" id="path_logo" name="path_logo" required class="form-control" disabled></td>
+					</span><input  type="text" id="path_logo" name="path_logo" required class="form-control" readonly style="min-width: 350px;">
+					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
+				</td>
 			</tr>
 			<tr>
 				<td>Imagen Banner:</td>
 				<td><span class="btn btn-success btn-file">
 				    Cargar imagen <input type="file" name='avata' id="avatar1">
-					</span><input style="max-width: 500px;" type="text" id="path_banner" name="path_banner" required class="form-control" disabled></td>
+					</span><input type="text" id="path_banner" name="path_banner" required class="form-control" readonly style="min-width: 350px;">
+					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
+				</td>
 			</tr>
 			<tr>
 				<td><input type="button" value="Atras" onclick="history.back()" class="btn btn-default"></td>
@@ -59,17 +63,14 @@
 	$('#posicion').limit('3','#charsLeftPosicion');
 	$('#avatar2').change(function() {
     var filename = $('#avatar2')[0].files[0];
-    // console.log(filename);
-      filename ="uploads/product-"+filename.name;
-    // console.log(filename);
+    filename ="uploads/product-"+filename.name;
     $('#path_logo').val(filename);
-    });
+  });
 	$('#avatar1').change(function() {
     var filename = $('#avatar1')[0].files[0];
-      filename ="uploads/product-"+filename.name;
-    // console.log(filename);
+    filename ="uploads/product-"+filename.name;
     $('#path_banner').val(filename);
-   });
+  });
 </script>
 
 {% endblock %}

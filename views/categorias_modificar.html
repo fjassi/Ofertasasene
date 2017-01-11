@@ -9,7 +9,7 @@
 <h2>{{ pagename }}</h2>
 <div class="panel panel-default">
 	<form method="POST" action="/categorias_modificar" class="form-inline" enctype="multipart/form-data">
-		<input hidden type="text" id="lastpath" name="lastpath" required class="form-control" value="{{ categoria.path_imagen }}">
+		<input hidden type="text" id="lastpath" name="lastpath" required value="{{ categoria.path_imagen }}">
 		<table align="center" class="table table-striped">
 			<tr hidden>
 				<td>ID: </td>
@@ -29,7 +29,8 @@
 					<span class="btn btn-success btn-file">
 				    Cargar imagen <input type="file" name='avatar' id="avatar">
 					</span>
-					<input style="width: 400px;" type="text" id="link" name="link" required class="form-control" value="{{ categoria.path_imagen }}">
+					<input style="width: 400px;" type="text" id="link" name="link" required class="form-control" value="{{ categoria.path_imagen }}" readonly style="min-width: 400px;">
+					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
 				</td>
 			</tr>			
 			<tr>
@@ -57,9 +58,8 @@
 	$('#link').limit('100','#charsLeftLink');	
 	$('#avatar').change(function() {
     var filename = $('#avatar')[0].files[0];
-      filename ="uploads/product-"+filename.name;
-    // console.log(filename);
+    filename ="uploads/product-"+filename.name;
     $('#link').val(filename);
-    });
+  });
 </script>
 {% endblock %}
