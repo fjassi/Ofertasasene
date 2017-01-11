@@ -26,8 +26,8 @@
 			  			<th colspan="2">Opciones</th>
 							<th hidden>ID</th>
 							<th>Nombre</th>
-							<th>Link</th>
 							<th>Texto</th>
+							<th>Link</th>							
 							<th style="text-align: center;">Activo</th>								
 						</tr>
 			  		</thead>
@@ -37,9 +37,9 @@
 								<td><a href="/categorias_modificar/{{ c.id }}"><button class="btn btn-warning menu" data-idmenu="2" data-accion="m">Modificar</button></a></td>
 								<td><a href='/categorias_borrar/{{ c.id }}' onclick="if (!confirm('¿Seguro desea eliminar?')) return false;"><button type="button" class="btn btn-danger">Eliminar</button><a/></td>
 								<td hidden>{{ c.id }}</td>
-								<td>{{ c.nombre }}</td>
-								<td>{{ c.path_imagen }}</td>
+								<td>{{ c.nombre }}</td>								
 								<td>{{ c.texto }}</td>
+								<td>{{ c.path_imagen }}</td>
 								<td style="text-align: center;">
 									{% if c.activo == 1 %}
 			            	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>

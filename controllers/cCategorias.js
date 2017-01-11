@@ -1,4 +1,5 @@
 var mCategorias = require('../models/mCategorias');
+var cImage = require('./cImage');
 
 module.exports = {
 	getLista: getLista,
@@ -46,22 +47,27 @@ function getModificar(req, res){
 			pagename: 'Modificar Categoria',
 			categoria: categoria[0]
 		});
-	});
+	});	
 }
 
 function postModificar(req, res){
 	const params = req.body;
 	const id = params.id;
 	const nombre = params.nombre;
-	const pach_imagen = params.link;
+	const path_imagen = params.link;
 	const texto = params.texto;
 	var activo = params.activo;
+	var lastpath = params.lastpath;
 	if(activo == "on")
 		activo = 1;
 	else
 		activo = 0;
+	if(lastpath != path_imagen){
+		cImage.remove_image(lastpath);		
+	}
+	
 
-	mCategorias.update(id, nombre, pach_imagen, texto, activo, function(){
+	mCategorias.update(id, nombre, path_imagen, texto, activo, function(){
 		res.redirect('categorias_lista');
 	});
 }
@@ -69,10 +75,12 @@ function postModificar(req, res){
 function getDel(req, res){
 	var params = req.params;
 	var id = params.id;
-
-	mCategorias.del(id, function(){
-		res.redirect('/categorias_lista'); 
-	});				
+	mCategorias.getById(id, function(categoria){
+		cImage.remove_image(categoria[0].path_imagen);
+		mCategorias.del(id, function(){
+			res.redirect('/categorias_lista'); 
+		});
+	});					
 }
 
 function getCategoriasPorGrupo(req, res){

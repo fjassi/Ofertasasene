@@ -9,6 +9,7 @@
 <h2>{{ pagename }}</h2>
 <div class="panel panel-default">
 	<form method="POST" action="/categorias_modificar" class="form-inline" enctype="multipart/form-data">
+		<input hidden type="text" id="lastpath" name="lastpath" required class="form-control" value="{{ categoria.path_imagen }}">
 		<table align="center" class="table table-striped">
 			<tr hidden>
 				<td>ID: </td>
@@ -54,14 +55,11 @@
 	$('#texto').limit('20','#charsLeftTexto');
 	$('#nombre').limit('45','#charsLeftNombre');
 	$('#link').limit('100','#charsLeftLink');	
-	$(function() {
-
-	});
 	$('#avatar').change(function() {
-        var filename = $('#avatar')[0].files[0];
-	        filename ="uploads/product-"+filename.name;
-        // console.log(filename);
-        $('#link').val(filename);
+    var filename = $('#avatar')[0].files[0];
+      filename ="uploads/product-"+filename.name;
+    // console.log(filename);
+    $('#link').val(filename);
     });
 </script>
 {% endblock %}

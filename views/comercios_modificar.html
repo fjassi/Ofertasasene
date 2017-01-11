@@ -9,13 +9,14 @@
 <h2>{{ pagename }}</h2>
 <div class="panel panel-default">
 	<form method="post" id="formalta" action="/comercios_modificar" class="form-inline" enctype="multipart/form-data">
+		<input hidden  type="text" id="lastpathLogo" name="lastpathLogo" required value=" {{ comercio.path_logo }}">
+		<input hidden  type="text" id="lastpathBanner" name="lastpathBanner" required value=" {{ comercio.path_banner }}">
 		<input hidden name="id" value="{{ comercio.id }}">
 		<table align="center" class="table table-striped">
 			<tr>
 				<td>Nombre:</td>
 				<td><input style="max-width: 500px;" type="text" id="nombre" name="nombre" required class="form-control" value="{{ comercio.nombre }}"><div class="aviso">Quedan <span id="charsLeftNombre"></span> caraceteres.</div></td>
-			</tr>
-			
+			</tr>			
 			<tr>
 				<td>Direccion:</td>
 				<td><input style="max-width: 500px;" type="text" id="direccion" name="direccion" required class="form-control" value="{{ comercio.direccion }}"><div class="aviso">Quedan <span id="charsLeftDireccion"></span> caraceteres.</div></td>
@@ -68,13 +69,7 @@
 	$('#direccion').limit('50','#charsLeftDireccion');
 	$('#telefono').limit('15','#charsLeftTelefono');
 	$('#link').limit('20','#charsLeftLink');
-	$('#path_logo').limit('100','#charsLeftPath_logo');
-	$('#path_banner').limit('100','#charsLeftPath_banner');
 	$('#posicion').limit('3','#charsLeftPosicion');
-	
-	$(function() {
-
-	});
 </script>
 
 {% endblock %}

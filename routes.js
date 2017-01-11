@@ -4,49 +4,7 @@ const cComercios    = require('./controllers/cComercios');
 const cCategorias       = require('./controllers/cCategorias');
 const cCategoriasGrupos = require('./controllers/cCategoriasGrupos');
 const cProductos      = require('./controllers/cProductos');
-
-var multer  = require('multer');
-// var upload = multer({ dest: 'uploads/' });
-
-var storage = multer.diskStorage({
- destination: function (req, file, callback) {
-   callback(null, './uploads');
- },
- filename: function (req, file, callback) {
-
-   callback(null, 'product-'+file.originalname);
-
- }
-});
-
-var upload = multer({ storage : storage}).single('avatar');
-var uploadm = multer({storage : storage}).array('avata',2);
-
-function subir(req,res, next){
- upload(req,res,function(err) {
-   if(err) {
-   	console.log("Archivo no subido");
-     return res.end("Error uploading file.");
-   }else{
-	   console.log("Archivo subido");
-	   return next();
-   }
- });
-}
-
-function subirmulti (req, res, next){
-	uploadm(req, res, function(err){
-		if(err) {
-   	console.log("Archivo no subido");
-     return res.end("Error uploading file.");
-   }else{
-	   console.log("Archivo subido");
-	   return next();
-   }
-	});
-}
-
-
+const cImage        = require('./controllers/cImage');
 
 function logout (req, res) {
 	console.log(req.cookies);
@@ -219,23 +177,23 @@ module.exports = function(app) {
 	//comercios
 		app.get("/comercios_lista", auth, cComercios.getLista);
 		app.get("/comercios_alta", auth, cComercios.getAlta);
-		app.post("/comercios_alta", auth, subirmulti, cComercios.postAlta);
+		app.post("/comercios_alta", auth, cImage.subirmulti, cComercios.postAlta);
 		app.get("/comercios_modificar/:id", auth, cComercios.getModificar);
-		app.post("/comercios_modificar", auth, subirmulti, cComercios.postModificar);
+		app.post("/comercios_modificar", auth, cImage.subirmulti, cComercios.postModificar);
 		app.get("/comercios_borrar/:id", auth, cComercios.getDel);
 	//productos
 		app.get("/productos_lista/:id_comercio", auth, cProductos.getLista);
 		app.get("/productos_alta/:id_comercio", auth, cProductos.getAlta);
-		app.post("/productos_alta", auth, subir, cProductos.postAlta);
+		app.post("/productos_alta", auth, cImage.subir, cProductos.postAlta);
 		app.get("/productos_modificar/:id", auth, cProductos.getModificar);
-		app.post("/productos_modificar", auth, subir, cProductos.postModificar);
+		app.post("/productos_modificar", auth, cImage.subir, cProductos.postModificar);
 		app.get("/productos_borrar/:id", auth, cProductos.getDel);
 	//categorias
 		app.get('/categorias_lista', auth, cCategorias.getLista);
 		app.get('/categorias_alta', auth, cCategorias.getAlta);
-		app.post('/categorias_alta', auth, subir, cCategorias.postAlta);
+		app.post('/categorias_alta', auth, cImage.subir, cCategorias.postAlta);
 		app.get('/categorias_modificar/:id', auth, cCategorias.getModificar);
-		app.post('/categorias_modificar', auth, subir, cCategorias.postModificar);
+		app.post('/categorias_modificar', auth, cImage.subir, cCategorias.postModificar);
 		app.get('/categorias_borrar/:id', auth, cCategorias.getDel);
 		app.get('/getCategoriasPorGrupo/:id_grupo', auth, cCategorias.getCategoriasPorGrupo);
 	//grupos de Categorias

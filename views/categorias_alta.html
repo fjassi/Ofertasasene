@@ -13,8 +13,7 @@
 			<tr>
 				<td>Nombre:</td>
 				<td><input style="max-width: 500px;" type="text" id="nombre" name="nombre" required class="form-control"><div class="aviso">Quedan <span id="charsLeftNombre"></span> caraceteres.</div></td>
-			</tr>
-			
+			</tr>			
 			<tr>
 				<td>Texto:</td>
 				<td><input style="max-width: 500px;" type="text" id="texto" name="texto" required class="form-control"><div class="aviso">Quedan <span id="charsLeftTexto"></span> caraceteres.</div></td>
@@ -40,12 +39,11 @@
 	$('#texto').limit('20','#charsLeftTexto');
 	$('#nombre').limit('45','#charsLeftNombre');
 	$('#link').limit('100','#charsLeftLink');	
-	$(function() {});
 	$('#avatar').change(function() {
-        var filename = $('#avatar')[0].files[0];
-	        filename ="uploads/product-"+filename.name;
-        // console.log(filename);
-        $('#link').val(filename);
+    var filename = $('#avatar')[0].files[0];
+      filename ="uploads/product-"+filename.name;
+    // console.log(filename);
+    $('#link').val(filename);
     });
 </script>
 
