@@ -36,7 +36,7 @@
 			<tr>
 				<td>Link logo:</td>
 				<td><span class="btn btn-success btn-file">
-				    Cargar imagen <input type="file" name='avata' id="avatar2">
+				    Cargar imagen <input required type="file" name='avata' id="avatar2">
 					</span><input  type="text" id="path_logo" name="path_logo" required class="form-control" value="{{ comercio.path_logo }}" readonly style="min-width: 350px;">
 					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
 				</td>
@@ -44,7 +44,7 @@
 			<tr>
 				<td>Link Banner:</td>
 				<td><span class="btn btn-success btn-file">
-				    Cargar imagen <input type="file" name='avata' id="avatar1">
+				    Cargar imagen <input required type="file" name='avata' id="avatar1">
 					</span><input type="text" id="path_banner" name="path_banner" required class="form-control" value="{{ comercio.path_banner }}" readonly style="min-width: 350px;">
 					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
 				</td>
@@ -76,12 +76,12 @@
 	$('#posicion').limit('3','#charsLeftPosicion');
 	$('#avatar2').change(function() {
     var filename = $('#avatar2')[0].files[0];
-    filename ="uploads/product-"+filename.name;
+    filename ="public/uploads/product-"+filename.name;
     $('#path_logo').val(filename);
   });
 	$('#avatar1').change(function() {
     var filename = $('#avatar1')[0].files[0];
-    filename ="uploads/product-"+filename.name;
+    filename ="public/uploads/product-"+filename.name;
     $('#path_banner').val(filename);
   });
 </script

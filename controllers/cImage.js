@@ -2,6 +2,8 @@
 var multer  = require('multer');
 var im = require('imagemagick');
 var fs = require('fs');
+var gm = require('gm').subClass({imageMagick: true});
+// const im = require('imagemagick-stream');
 // var upload = multer({ dest: 'uploads/' });
 
 var storage = multer.diskStorage({
@@ -19,7 +21,8 @@ var uploadm = multer({storage : storage}).array('avata',2);
 module.exports = {
 	subir: subir,
 	subirmulti: subirmulti, 
-	remove_image: remove_image
+	remove_image: remove_image,
+	resize_product: resize_product
 }
 
 function subir(req,res, next){
@@ -61,15 +64,15 @@ function subirmulti (req, res, next){
 }
 
 function remove_image (path){
-	var path = './public/'+path;
+	var path = './'+path;
 	console.log(path);
 	fs.exists(path, function(exists) {
 		  if(exists) {
 		    console.log('*****************encontradoo*****************.');
-		    console.log('File exists. Deleting now ...');
+		    console.log('Archivo encontrado. Eliminando...');
 		    fs.unlink(path);
 		  } else {
-		    console.log('File not found, so not deleting.');
+		    console.log('Archivo no encontrado, no se puede eliminar');
 		  }
 		});
 }
@@ -78,3 +81,31 @@ function remove_image (path){
 //   if (err) throw err;
 //   console.log('successfully deleted /tmp/hello');
 // });
+
+// function resize_banner (filename){
+// 	im(filename)
+//   .resize('200x200')
+//   .to(filename);
+// }
+
+// function resize_product (filename){
+// var fname = '/'+filename;
+// var writeStream = '/public/uploads/250'+filename;
+// gm(fname)
+// .resize(353, 257)
+// .autoOrient()
+// .write(writeStream, function (err) {
+//   if (!err) console.log(' hooray! ');
+// });
+
+
+// 	console.log(filename);
+// 	// var fname = './'+filename;
+// 	// console.log(filename);
+// im.convert([filename, '-resize', '25x120', 'kittens-small.jpg'], 
+// function(err, stdout){
+//   if (err) throw err;
+//   console.log('stdout:', stdout);
+// });
+// 	im.convert()
+}

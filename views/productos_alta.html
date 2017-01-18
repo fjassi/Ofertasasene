@@ -33,7 +33,7 @@
 				<td>Imagen del producto:</td>
 				<td>
 					<span class="btn btn-success btn-file">
-				    Cargar imagen <input type="file" name="avatar" id="avatar">
+				    Cargar imagen <input type="file" name="avatar" id="avatar" required>
 					</span><input type="text" id="link" name="link" required class="form-control" readonly style="min-width: 350px;">
 					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
 				</td>
@@ -53,7 +53,7 @@
 	$('#texto').limit('20','#charsLeftTexto');
 	$('#avatar').change(function() {
     var filename = $('#avatar')[0].files[0];
-    filename ="uploads/product-"+filename.name;
+    filename ="public/uploads/product-"+filename.name;
     $('#link').val(filename);
   });
 </script>

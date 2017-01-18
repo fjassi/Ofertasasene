@@ -27,7 +27,7 @@
 				<td>Link:</td>
 				<td>
 					<span class="btn btn-success btn-file">
-				    Cargar imagen <input type="file" name='avatar' id="avatar">
+				    Cargar imagen <input required type="file" name='avatar' id="avatar">
 					</span>
 					<input style="width: 400px;" type="text" id="link" name="link" required class="form-control" value="{{ categoria.path_imagen }}" readonly style="min-width: 400px;">
 					<br><small>Recomendado imagenes cuadradas. Ej: 200x200.</small>
@@ -58,7 +58,7 @@
 	$('#link').limit('100','#charsLeftLink');	
 	$('#avatar').change(function() {
     var filename = $('#avatar')[0].files[0];
-    filename ="uploads/product-"+filename.name;
+    filename ="public/uploads/product-"+filename.name;
     $('#link').val(filename);
   });
 </script>

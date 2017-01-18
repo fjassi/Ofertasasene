@@ -42,11 +42,15 @@ function getAlta(req, res){
 
 function postAlta(req, res){
 	const params = req.body;
+	const file = req.file;
 	const link = params.link;
 	const precio = params.precio;
 	const id_comercio = params.id_comercio;
 	const id_categoria = params.id_categoria;
 	const texto = params.texto;
+	console.log(file.originalname);
+
+	// cImage.resize_product(link);
 
 	mProductos.insert(link, precio, id_comercio, id_categoria, texto, function(){
 		res.redirect("productos_lista/"+id_comercio);
